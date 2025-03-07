@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 const Sidebar = () => {
   return (
     <div className="w-[25%] h-full p-2 flex-col gap-2 text-white hidden lg:flex">
-      <div className="bg-gray-800 h-[15%] rounded flex flex-col justify-around">
+      <div className="bg-slate-950 h-[15%] rounded flex flex-col justify-around">
         <div className="flex items-center gap-3 pl-8 cursor-pointer">
           <img src={assets.home_icon} alt="home logo" className="w-6" />
           <p className="font-bold ">Home</p>
@@ -14,7 +14,7 @@ const Sidebar = () => {
           <p className="font-bold ">Search</p>
         </div>
       </div>
-      <div className="bg-gray-800 h-[85%] rounded">
+      <div className="bg-slate-950 h-[85%] rounded">
         <div className="p-4 flex items-center justify-between">
           <div className="flex items-center justify-center gap-3">
             <img src={assets.stack_icon} className="w-8" alt=" library" />
