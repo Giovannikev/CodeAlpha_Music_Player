@@ -53,6 +53,9 @@ export default function PlayerControls({
           <div className="hidden sm:block">
             <div className="font-semibold text-sm">{currentTrack.title}</div>
             <div className="text-xs text-neutral-400">{currentTrack.name}</div>
+            <div className="text-xs text-neutral-400">
+              {currentTrack.category}
+            </div>
           </div>
           {toggleLike && (
             <Button size="icon" className="hidden sm:flex" onClick={toggleLike}>

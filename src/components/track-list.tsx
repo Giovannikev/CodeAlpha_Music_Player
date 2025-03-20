@@ -130,7 +130,7 @@ export default function TrackList({
                       isCurrentTrack && "text-green-500"
                     )}
                   >
-                    {track.title}
+                    {track.title} ({track.category})
                   </div>
                 </div>
               </div>

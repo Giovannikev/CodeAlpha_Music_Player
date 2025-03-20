@@ -131,6 +131,7 @@ export const songsData: Song[] = [
             file: chris_press_me,
             description: "Put a smile on your face with these happy tunes",
             duration: "3:00",
+            category: "R&B"
       },
       {
             id: 1,
@@ -140,6 +141,7 @@ export const songsData: Song[] = [
             file: chris_angels_number,
             description: "Put a smile on your face with these happy tunes",
             duration: "2:20",
+            category: "R&B"
       },
       {
             id: 2,
@@ -149,6 +151,7 @@ export const songsData: Song[] = [
             file: chris_nightmares,
             description: "Put a smile on your face with these happy tunes",
             duration: "2:32",
+            category: "R&B"
       },
       {
             id: 3,
@@ -158,6 +161,7 @@ export const songsData: Song[] = [
             file: chris_shouldve_kissed_you,
             description: "Put a smile on your face with these happy tunes",
             duration: "2:50",
+            category: "R&B"
       },
       {
             id: 4,
@@ -167,6 +171,7 @@ export const songsData: Song[] = [
             file: song2,
             description: "Put a smile on your face with these happy tunes",
             duration: "3:10",
+            category: "Soul"
       },
       {
             id: 5,
@@ -176,6 +181,7 @@ export const songsData: Song[] = [
             file: song3,
             description: "Put a smile on your face with these happy tunes",
             duration: "2:45",
+            category: "Soul"
       },
       {
             id: 6,
@@ -185,6 +191,7 @@ export const songsData: Song[] = [
             file: song1,
             description: "Put a smile on your face with these happy tunes",
             duration: "2:18",
+            category: "Soul"
       },
       {
             id: 7,
@@ -194,6 +201,7 @@ export const songsData: Song[] = [
             file: song2,
             description: "Put a smile on your face with these happy tunes",
             duration: "2:35",
+            category: "Soul"
       },
 ]
 

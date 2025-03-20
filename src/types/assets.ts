@@ -15,6 +15,7 @@ export interface Song {
       file: string
       description: string
       duration: string
+      category: string
 }
 
 export interface Assets {
