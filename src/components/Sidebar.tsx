@@ -1,47 +1,145 @@
-import { assets } from "@/assets/assets";
-import { Button } from "./ui/button";
+"use client";
 
-const Sidebar = () => {
+import { Button } from "@/components/ui/button";
+import { assets } from "@/lib/data";
+import type { View } from "@/types/assets";
+import type { Playlist } from "@/types/assets";
+import { cn } from "@/lib/utils";
+
+interface SidebarProps {
+  playlists: Playlist[];
+  currentView: View;
+  setCurrentView: (view: View) => void;
+  setSelectedPlaylistId: (id: number | null) => void;
+  likedSongs: number[];
+}
+
+export default function Sidebar({
+  playlists,
+  currentView,
+  setCurrentView,
+  setSelectedPlaylistId,
+  likedSongs,
+}: SidebarProps) {
   return (
-    <div className="w-[25%] h-full p-2 flex-col gap-2 text-white hidden lg:flex">
-      <div className="bg-slate-950 h-[15%] rounded flex flex-col justify-around">
-        <div className="flex items-center gap-3 pl-8 cursor-pointer">
-          <img src={assets.home_icon} alt="home logo" className="w-6" />
-          <p className="font-bold ">Home</p>
+    <div className="w-64 bg-black p-6 flex flex-col gap-6 border-r border-gray-50 h-full">
+      <div className="space-y-6">
+        <div className="flex items-center gap-4">
+          <img
+            src={assets.spotify_logo || "/placeholder.svg"}
+            alt="Spotify"
+            width={40}
+            height={40}
+            className="object-contain"
+          />
+          Music Player
         </div>
-        <div className="flex items-center gap-3 pl-8 cursor-pointer">
-          <img src={assets.search_icon} alt="home logo" className="w-6" />
-          <p className="font-bold ">Search</p>
-        </div>
+        <nav className="space-y-2">
+          <Button
+            className={cn(
+              "w-full justify-start gap-4",
+              currentView === "home" ? "text-white" : "text-neutral-500"
+            )}
+            onClick={() => setCurrentView("home")}
+          >
+            <img
+              src={assets.home_icon || "/placeholder.svg"}
+              alt="Home"
+              width={24}
+              height={24}
+            />
+            Home
+          </Button>
+          <Button
+            className={cn(
+              "w-full justify-start gap-4",
+              currentView === "search" ? "text-white" : "text-neutral-500"
+            )}
+            onClick={() => setCurrentView("search")}
+          >
+            <img
+              src={assets.search_icon || "/placeholder.svg"}
+              alt="Search"
+              width={24}
+              height={24}
+            />
+            Search
+          </Button>
+          <Button
+            className={cn(
+              "w-full justify-start gap-4",
+              currentView === "library" ? "text-white " : "text-neutral-500"
+            )}
+            onClick={() => setCurrentView("library")}
+          >
+            <img
+              src={assets.stack_icon || "/placeholder.svg"}
+              alt="Library"
+              width={24}
+              height={24}
+            />
+            Your Library
+          </Button>
+        </nav>
       </div>
-      <div className="bg-slate-950 h-[85%] rounded">
-        <div className="p-4 flex items-center justify-between">
-          <div className="flex items-center justify-center gap-3">
-            <img src={assets.stack_icon} className="w-8" alt=" library" />
-            <p className="font-semibold">Your library</p>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <img src={assets.arrow_icon} className="w-5" alt=" arrow" />
-            <img src={assets.plus_icon} className="w-5" alt=" library" />
-          </div>
-        </div>
-        <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
-          <h1>Create your first playlist</h1>
-          <p className="font-light">it's easy we will help you</p>
-          <Button variant={"secondary"} className="mt-4">
-            Create Playlist
-          </Button>
-        </div>
-        <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
-          <h1>Let's find some podcats to follow</h1>
-          <p className="font-light">we will keep you update on new episodes</p>
-          <Button variant={"secondary"} className="mt-4">
-            Browse podcats
-          </Button>
+      <div className="space-y-2 mt-6">
+        <Button
+          className="w-full justify-start gap-4 text-neutral-500 hover:text-white"
+          onClick={() => {
+            alert("Create Playlist functionality Will be implemented soon");
+          }}
+        >
+          <img
+            src={assets.plus_icon || "/placeholder.svg"}
+            alt="Create Playlist"
+            width={20}
+            height={20}
+            className="bg-neutral-700 p-1 rounded-sm"
+          />
+          Create Playlist
+        </Button>
+        <Button
+          className={cn(
+            "w-full justify-start gap-4",
+            currentView === "liked-songs"
+              ? "text-white bg-gray-50/50"
+              : "text-neutral-500"
+          )}
+          onClick={() => setCurrentView("liked-songs")}
+        >
+          <img
+            src={assets.like_icon || "/placeholder.svg"}
+            alt="Liked Songs"
+            width={20}
+            height={20}
+            className="bg-gradient-to-br from-indigo-600 to-neutral-300 p-1 rounded-sm"
+          />
+          Liked Songs
+          <span className="ml-auto text-xs">{likedSongs.length}</span>
+        </Button>
+      </div>
+      <div className="border-t border-gray-50 pt-4 mt-2 flex-1 overflow-hidden">
+        <div className="space-y-2 max-h-[calc(100%-2rem)] overflow-y-auto">
+          {playlists.map((playlist) => (
+            <Button
+              key={playlist.id}
+              className={cn(
+                "w-full justify-start text-sm",
+                currentView === "playlist" && playlist.id === playlist.id
+                  ? ""
+                  : "text-neutral-500 "
+              )}
+              onClick={() => {
+                setCurrentView("playlist");
+                setSelectedPlaylistId(playlist.id);
+              }}
+            >
+              {playlist.name}
+              <span className="ml-auto text-xs">{playlist.tracks.length}</span>
+            </Button>
+          ))}
         </div>
       </div>
     </div>
   );
-};
-
-export default Sidebar;
+}
