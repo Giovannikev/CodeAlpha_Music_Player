@@ -141,7 +141,6 @@ export default function TrackList({
               <div className="flex items-center justify-end gap-4">
                 {onToggleLike && (
                   <Button
-                    variant="ghost"
                     size="icon"
                     className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100"
                     onClick={(e) => {

@@ -41,10 +41,9 @@ import chris_press_me from '@/assets/Chris_Brown_-_Press_Me__Visualizer_(256k).m
 import chris_angels_number from '@/assets/Chris_Brown_-_Angel_Numbers___Ten_Toes__Visualizer_(256k).mp3'
 import chris_nightmares from '@/assets/Chris_Brown_-_Nightmares__Official_Video__ft._Byron_Messia(256k).mp3'
 import chris_shouldve_kissed_you from '@/assets/Chris_Brown_-_Should_ve_Kissed_You__Official_Video_(256k).mp3'
-import type { Album, Song, Assets, Playlist } from "@/types/assets"
+import type { Album, Song, Assets } from "@/types/assets"
 
 
-// Images et icônes
 export const assets: Assets = {
       bell_icon: bell_icon,
       home_icon: home_icon,
@@ -123,7 +122,6 @@ export const albumsData: Album[] = [
       },
 ]
 
-// Données des chansons
 export const songsData: Song[] = [
       {
             id: 0,
@@ -199,48 +197,4 @@ export const songsData: Song[] = [
       },
 ]
 
-
-
-export const defaultPlaylists: Playlist[] = [
-      {
-            id: 0,
-            name: "Liked Songs",
-            tracks: [0, 1, 3],
-      },
-      {
-            id: 1,
-            name: "Your Episodes",
-            tracks: [2, 4, 6],
-      },
-      {
-            id: 2,
-            name: "Top Hits 2023",
-            tracks: [0, 2, 4, 6],
-      },
-      {
-            id: 3,
-            name: "Chill Vibes",
-            tracks: [1, 3, 5, 7],
-      },
-      {
-            id: 4,
-            name: "Workout Mix",
-            tracks: [0, 2, 4],
-      },
-      {
-            id: 5,
-            name: "Road Trip",
-            tracks: [1, 3, 5],
-      },
-      {
-            id: 6,
-            name: "Focus Flow",
-            tracks: [2, 4, 6],
-      },
-      {
-            id: 7,
-            name: "Throwback Thursday",
-            tracks: [0, 3, 6],
-      },
-]
 

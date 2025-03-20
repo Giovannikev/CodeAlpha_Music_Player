@@ -44,11 +44,6 @@ export interface Assets {
       clock_icon: string
 }
 
-export type View = "home" | "search" | "album" | "library" | "liked-songs" | "playlist"
+export type View = "home" | "search" | "album" | "library" | "liked-songs"
 
-export interface Playlist {
-      id: number
-      name: string
-      tracks: number[] // IDs des chansons dans la playlist
-}
 

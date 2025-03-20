@@ -4,13 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { assets } from "@/lib/data";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import type { View } from "@/types/assets";
 
 interface TopBarProps {
@@ -41,7 +34,6 @@ export default function TopBar({
     <div className="sticky top-0 bg-neutral-900/90 backdrop-blur-md p-4 flex items-center justify-between z-10">
       <div className="flex items-center gap-2">
         <Button
-          variant="ghost"
           size="icon"
           className="rounded-full bg-black/40"
           onClick={navigateBack}
@@ -56,7 +48,6 @@ export default function TopBar({
           />
         </Button>
         <Button
-          variant="ghost"
           size="icon"
           className="rounded-full bg-black/40"
           onClick={navigateForward}
@@ -102,50 +93,11 @@ export default function TopBar({
           </div>
         )}
       </div>
-      <div className="flex items-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          className="text-sm bg-black text-white border-neutral-700 hover:border-white"
-          onClick={() =>
-            window.open("https://www.spotify.com/premium/", "_blank")
-          }
-        >
-          Upgrade
-        </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="h-8 w-8 cursor-pointer">
-              <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-              <AvatarFallback className="bg-neutral-800">U</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-56 bg-neutral-800 text-white border-neutral-700"
-          >
-            <DropdownMenuItem className="cursor-pointer hover:bg-neutral-700">
-              Account
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer hover:bg-neutral-700">
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="cursor-pointer hover:bg-neutral-700"
-              onClick={() => setCurrentView("library")}
-            >
-              Your Library
-            </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-neutral-700" />
-            <DropdownMenuItem className="cursor-pointer hover:bg-neutral-700">
-              Settings
-            </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-neutral-700" />
-            <DropdownMenuItem className="cursor-pointer hover:bg-neutral-700">
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div>
+        <Avatar className="h-8 w-8 cursor-pointer">
+          <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+          <AvatarFallback className="bg-neutral-800">U</AvatarFallback>
+        </Avatar>
       </div>
     </div>
   );

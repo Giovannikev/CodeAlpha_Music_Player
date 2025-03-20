@@ -74,15 +74,6 @@ export default function PlayerControls({
         {/* Controls */}
         <div className="flex flex-col items-center justify-center">
           <div className="flex items-center gap-4 mb-1">
-            <Button size="icon">
-              <img
-                src={assets.shuffle_icon || "/placeholder.svg"}
-                alt="Shuffle"
-                width={16}
-                height={16}
-                className="opacity-60 hover:opacity-100"
-              />
-            </Button>
             <Button size="icon" onClick={handlePrevious}>
               <img
                 src={assets.prev_icon || "/placeholder.svg"}
@@ -110,15 +101,6 @@ export default function PlayerControls({
                 className="opacity-60 hover:opacity-100"
               />
             </Button>
-            <Button size="icon">
-              <img
-                src={assets.loop_icon || "/placeholder.svg"}
-                alt="Repeat"
-                width={16}
-                height={16}
-                className="opacity-60 hover:opacity-100"
-              />
-            </Button>
           </div>
           <div className="flex items-center gap-2 w-full max-w-md">
             <span className="text-xs text-neutral-400 w-10 text-right">
@@ -139,24 +121,6 @@ export default function PlayerControls({
 
         {/* Volume */}
         <div className="hidden md:flex items-center justify-end gap-2">
-          <Button size="icon">
-            <img
-              src={assets.queue_icon || "/placeholder.svg"}
-              alt="Queue"
-              width={16}
-              height={16}
-              className="opacity-60 hover:opacity-100"
-            />
-          </Button>
-          <Button size="icon">
-            <img
-              src={assets.speaker_icon || "/placeholder.svg"}
-              alt="Speaker"
-              width={16}
-              height={16}
-              className="opacity-60 hover:opacity-100"
-            />
-          </Button>
           <div className="flex items-center gap-2">
             <Button size="icon" onClick={toggleMute}>
               <img
@@ -175,15 +139,6 @@ export default function PlayerControls({
               onValueChange={handleVolumeChange}
             />
           </div>
-          <Button size="icon">
-            <img
-              src={assets.zoom_icon || "/placeholder.svg"}
-              alt="Maximize"
-              width={16}
-              height={16}
-              className="opacity-60 hover:opacity-100"
-            />
-          </Button>
         </div>
       </div>
     </div>

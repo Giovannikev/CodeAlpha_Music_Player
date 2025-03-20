@@ -3,22 +3,17 @@
 import { Button } from "@/components/ui/button";
 import { assets } from "@/lib/data";
 import type { View } from "@/types/assets";
-import type { Playlist } from "@/types/assets";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
-  playlists: Playlist[];
   currentView: View;
   setCurrentView: (view: View) => void;
-  setSelectedPlaylistId: (id: number | null) => void;
   likedSongs: number[];
 }
 
 export default function Sidebar({
-  playlists,
   currentView,
   setCurrentView,
-  setSelectedPlaylistId,
   likedSongs,
 }: SidebarProps) {
   return (
@@ -78,7 +73,7 @@ export default function Sidebar({
               width={24}
               height={24}
             />
-            Your Library
+            Library
           </Button>
         </nav>
       </div>
@@ -117,28 +112,6 @@ export default function Sidebar({
           Liked Songs
           <span className="ml-auto text-xs">{likedSongs.length}</span>
         </Button>
-      </div>
-      <div className="border-t border-gray-50 pt-4 mt-2 flex-1 overflow-hidden">
-        <div className="space-y-2 max-h-[calc(100%-2rem)] overflow-y-auto">
-          {playlists.map((playlist) => (
-            <Button
-              key={playlist.id}
-              className={cn(
-                "w-full justify-start text-sm",
-                currentView === "playlist" && playlist.id === playlist.id
-                  ? ""
-                  : "text-neutral-500 "
-              )}
-              onClick={() => {
-                setCurrentView("playlist");
-                setSelectedPlaylistId(playlist.id);
-              }}
-            >
-              {playlist.name}
-              <span className="ml-auto text-xs">{playlist.tracks.length}</span>
-            </Button>
-          ))}
-        </div>
       </div>
     </div>
   );

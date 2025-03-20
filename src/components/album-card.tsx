@@ -60,7 +60,7 @@ export default function AlbumCard({
         />
         {(isHovered || isPlaying) && (
           <button
-            className="absolute bottom-2 right-2 bg-green-500 rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0"
+            className="absolute bottom-2 right-2 bg-green-500 rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 cursor-pointer"
             onClick={handlePlayClick}
           >
             <img
