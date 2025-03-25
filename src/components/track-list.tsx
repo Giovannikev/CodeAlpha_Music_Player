@@ -71,17 +71,14 @@ export default function TrackList({
       <div className="space-y-2">
         {tracks.map((track, index) => {
           const isCurrentTrack =
-            tracks[index].id === tracks[currentTrackIndex]?.id;
+            tracks[index].id == tracks[currentTrackIndex]?.id;
           const isLiked = likedSongs.includes(track.id);
 
           return (
             <div
               key={track.id}
               className={cn(
-                "grid grid-cols-[16px_4fr_3fr_1fr] md:grid-cols-[16px_4fr_3fr_2fr_1fr] gap-4 items-center text-left h-auto py-2 px-4 rounded-md group",
-                isCurrentTrack
-                  ? "bg-neutral-700/50 text-green-500"
-                  : "hover:bg-neutral-800/50 text-white"
+                "grid grid-cols-[16px_4fr_3fr_1fr] md:grid-cols-[16px_4fr_3fr_2fr_1fr] gap-4 items-center text-left h-auto py-2 px-4 rounded-md group hover:bg-neutral-800/50 text-white"
               )}
             >
               <div className="flex items-center justify-center">
@@ -92,7 +89,6 @@ export default function TrackList({
                       alt="Playing"
                       width={14}
                       height={14}
-                      className="text-green-500"
                     />
                   ) : (
                     <span>{index + 1}</span>
@@ -124,12 +120,7 @@ export default function TrackList({
                   className="rounded"
                 />
                 <div className="overflow-hidden">
-                  <div
-                    className={cn(
-                      "font-medium truncate",
-                      isCurrentTrack && "text-green-500"
-                    )}
-                  >
+                  <div className={cn("font-medium truncate")}>
                     {track.title} ({track.category})
                   </div>
                 </div>

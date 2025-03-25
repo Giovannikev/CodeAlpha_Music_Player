@@ -8,7 +8,7 @@ import AlbumCard from "./album-card";
 import TrackList from "./track-list";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useSpotify } from "@/hooks/useMusicPlayer";
+import { useMusicPlayer } from "@/hooks/useMusicPlayer";
 import { assets } from "@/lib/data";
 
 export default function SpotifyInterface() {
@@ -45,7 +45,9 @@ export default function SpotifyInterface() {
     albumsData,
     songsData,
     isMobile,
-  } = useSpotify();
+    selectedCategory,
+    setSelectedCategory,
+  } = useMusicPlayer();
 
   const renderMainContent = () => {
     switch (currentView) {
@@ -81,15 +83,21 @@ export default function SpotifyInterface() {
           </div>
         );
       }
-      case "search":
+      case "search": {
+        const finalFilteredTracks = selectedCategory
+          ? filteredTracks.filter(
+              (track) => track.category === selectedCategory
+            )
+          : filteredTracks;
+
         return (
           <div className="p-6">
             <h1 className="text-2xl font-bold mb-6">Search Results</h1>
-            {filteredTracks.length > 0 ? (
+            {finalFilteredTracks.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-                {filteredTracks.map((track, index) => (
+                {finalFilteredTracks.map((track) => (
                   <AlbumCard
-                    key={index}
+                    key={track.id}
                     item={track}
                     isPlaying={
                       tracks.findIndex((t) => t.id === track.id) ===
@@ -111,16 +119,17 @@ export default function SpotifyInterface() {
             )}
           </div>
         );
+      }
       case "library":
         return (
           <div className="p-6">
             <h1 className="text-2xl font-bold mb-6">Your Library</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-              {albumsData.map((album, index) => (
+              {albumsData.map((album) => (
                 <Button
                   key={album.id}
                   className="flex items-center gap-4 bg-neutral-800/50 hover:bg-neutral-800 h-auto p-0 overflow-hidden"
-                  onClick={() => viewAlbum(index)}
+                  onClick={() => viewAlbum(album.id)}
                 >
                   <img
                     src={album.image || "/placeholder.svg"}
@@ -205,11 +214,11 @@ export default function SpotifyInterface() {
           <div className="p-6">
             <h1 className="text-2xl font-bold mb-6">All Songs</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-              {songsData.map((song, index) => (
+              {songsData.map((song) => (
                 <Button
                   key={song.id}
                   className="flex items-center gap-4 bg-neutral-800/50 hover:bg-neutral-800 h-auto p-0 overflow-hidden"
-                  onClick={() => playTrack(index)}
+                  onClick={() => playTrack(song.id)}
                 >
                   <img
                     src={song.image || "/placeholder.svg"}
@@ -241,7 +250,7 @@ export default function SpotifyInterface() {
             <div className="mb-8">
               <h1 className="text-2xl font-semibold font-sans">All Albums</h1>
               <div className="grid grid-cols-5 gap-2">
-                {albumsData.map((album, index) => (
+                {albumsData.map((album) => (
                   <div
                     key={album.id}
                     className="max-w-[180px] sm:min-w-[200px] snap-start"
@@ -249,8 +258,8 @@ export default function SpotifyInterface() {
                     <AlbumCard
                       item={album}
                       isPlaying={false}
-                      onPlay={() => playTrack(index % tracks.length)}
-                      onViewAlbum={() => viewAlbum(index)}
+                      onPlay={() => playTrack(album.id % tracks.length)}
+                      onViewAlbum={() => viewAlbum(album.id)}
                       playIcon={assets.play_icon}
                       pauseIcon={assets.pause_icon}
                       isAlbum={true}
@@ -305,6 +314,8 @@ export default function SpotifyInterface() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             isMobile={isMobile}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
             navigationHistory={navigationHistory}
             currentHistoryIndex={currentHistoryIndex}
             navigateBack={navigateBack}

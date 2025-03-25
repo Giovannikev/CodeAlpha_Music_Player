@@ -2,6 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { assets } from "@/lib/data";
 import type { View } from "@/types/assets";
@@ -9,6 +16,8 @@ import type { View } from "@/types/assets";
 interface TopBarProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  selectedCategory: string;
+  setSelectedCategory: (categroy: string) => void;
   isMobile: boolean;
   navigationHistory: View[];
   currentHistoryIndex: number;
@@ -20,6 +29,8 @@ interface TopBarProps {
 export default function TopBar({
   searchQuery,
   setSearchQuery,
+  selectedCategory,
+  setSelectedCategory,
   isMobile,
   navigationHistory,
   currentHistoryIndex,
@@ -72,7 +83,7 @@ export default function TopBar({
           </Button>
         )}
         {!isMobile && (
-          <div className="relative ml-2">
+          <div className="flex relative ml-2 gap-4">
             <div className="absolute left-2.5 top-2.5">
               <img
                 src={assets.search_icon || "/placeholder.svg"}
@@ -90,6 +101,18 @@ export default function TopBar({
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setCurrentView("search")}
             />
+            <Select
+              value={selectedCategory}
+              onValueChange={setSelectedCategory}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="R&B">R&B</SelectItem>
+                <SelectItem value="Soul">Soul</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         )}
       </div>

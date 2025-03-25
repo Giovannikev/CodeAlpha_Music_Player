@@ -15,7 +15,7 @@ const tracks = songsData.map((song) => ({
       durationSeconds: convertDurationToSeconds(song.duration),
 }));
 
-export function useSpotify() {
+export function useMusicPlayer() {
       const audioRef = useRef<HTMLAudioElement | null>(null);
       const [isPlaying, setIsPlaying] = useState(false);
       const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -30,11 +30,12 @@ export function useSpotify() {
       const [likedSongs, setLikedSongs] = useState<number[]>([]);
       const [navigationHistory, setNavigationHistory] = useState<View[]>(["home"]);
       const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
+      const [selectedCategory, setSelectedCategory] = useState<string>("");
       const isMobile = useMobile();
 
       const currentTrack = tracks[currentTrackIndex];
 
-      // Mise à jour de la navigation
+
       const updateView = (view: View) => {
             const newHistory = [
                   ...navigationHistory.slice(0, currentHistoryIndex + 1),
@@ -59,7 +60,7 @@ export function useSpotify() {
             }
       };
 
-      // Initialisation et gestion de l'audio
+
       useEffect(() => {
             audioRef.current = new Audio(currentTrack.file);
             audioRef.current.volume = volume / 100;
@@ -84,22 +85,31 @@ export function useSpotify() {
             };
       }, [currentTrackIndex]);
 
-      // Gestion de la recherche
+
       useEffect(() => {
-            if (searchQuery.trim() === "") {
-                  setFilteredTracks(tracks);
-            } else {
-                  const filtered = tracks.filter(
+            let filtered = tracks;
+
+            if (searchQuery.trim() !== "") {
+                  filtered = filtered.filter(
                         (track) =>
                               track.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                               track.name.toLowerCase().includes(searchQuery.toLowerCase())
                   );
-                  setFilteredTracks(filtered);
-                  if (searchQuery.trim().length > 0) updateView("search");
             }
-      }, [searchQuery]);
 
-      // Contrôle de la lecture audio
+            if (selectedCategory.trim() !== "") {
+                  filtered = filtered.filter(
+                        (track) => track.category === selectedCategory
+                  );
+            }
+
+            setFilteredTracks(filtered);
+            if (searchQuery.trim().length > 0 || selectedCategory.trim().length > 0) {
+                  updateView("search");
+            }
+      }, [searchQuery, selectedCategory]);
+
+
       useEffect(() => {
             if (audioRef.current) {
                   if (isPlaying) {
@@ -119,7 +129,7 @@ export function useSpotify() {
             }
       }, [volume, isMuted]);
 
-      // Fonctions de contrôle
+
       const togglePlay = () => setIsPlaying((prev) => !prev);
 
       const handleNext = () => {
@@ -213,5 +223,7 @@ export function useSpotify() {
             albumsData,
             songsData,
             isMobile,
+            selectedCategory,
+            setSelectedCategory,
       };
 }
